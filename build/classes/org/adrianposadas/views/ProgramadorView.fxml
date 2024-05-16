@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianposadas.controllers.ProgramadorController">
+   <children>
+      <ImageView fitHeight="562.0" fitWidth="1000.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/White%20and%20Blue%20Professional%20Modern%20Technology%20Pitch%20Deck%20Presentation%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="7.0" prefHeight="93.0" prefWidth="346.0" text="Programador">
+         <font>
+            <Font name="Lucida Sans Unicode" size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="73.0" prefHeight="93.0" prefWidth="361.0" text="Adrian Philip Posadas Del Cid">
+         <font>
+            <Font name="Lucida Sans Unicode" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="126.0" prefHeight="93.0" prefWidth="361.0" text="IN5BV">
+         <font>
+            <Font name="Lucida Sans Unicode" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="99.0" prefHeight="93.0" prefWidth="361.0" text="2023357">
+         <font>
+            <Font name="Lucida Sans Unicode" size="25.0" />
+         </font>
+      </Label>
+      <Label layoutX="7.0" layoutY="202.0" prefHeight="93.0" prefWidth="385.0" text="¿Por qué me gusta programar?">
+         <font>
+            <Font name="Lucida Sans Unicode" size="25.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="14.0" layoutY="281.0" prefHeight="155.0" prefWidth="346.0" text="Decidí entrar a al carrera de informática porque desde&#10;pequeño estuve muy interesado en las computadoras y la&#10;tecnología, y me interesaba bastante saber como funcionaba&#10;todo por dentro. Yo pensaba que era algo demasiado&#10;complicado, pero resultó no ser así, y aunque aún hay&#10;muchas cosas que no sé hacer, me gustan los desafíos y&#10;descubrir cosas nuevas." />
+      <ImageView fitHeight="375.0" fitWidth="318.0" layoutX="513.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/retrato.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnHome" layoutX="14.0" layoutY="483.0" mnemonicParsing="false" onAction="#clickProgramador" onMouseClicked="#clickProgramador" prefHeight="50.0" prefWidth="73.0" styleClass="button1" stylesheets="@../source/Proyecto2023357CSS.css">
+         <graphic>
+            <ImageView fitHeight="57.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
