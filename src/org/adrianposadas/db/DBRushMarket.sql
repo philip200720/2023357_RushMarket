@@ -26,7 +26,25 @@ create table Proveedores(
     primary key PK_codigoProveedor (codigoProveedor)
 );
 
+create table Compras(
+    numeroDocumento int,
+    fechaDocumento date,
+    descripcion varchar(60),
+    totalDocumento decimal(10,2),
+    primary key PK_numeroDocumento(numerodocumento)
+);
 
+create table TipoProducto (
+    codigoTipoProducto int primary key,
+    descripcion varchar(45) not null
+);
+
+create table CargoEmpleado(
+    codigoCargoEmpleado int,
+    nombreCargo varchar(45),
+    descripcionCargo varchar(45),
+    primary key PK_codigoCargoEmpleado(codigoCargoEmpleado)
+);
 
 -- CRUD
 -- Clientes
@@ -58,7 +76,7 @@ begin
     end $$
  
 delimiter ;
- 
+call sp_ListarClientes();
 delimiter $$
 create procedure sp_BuscarClientes (in codigoCliente int)
 begin 
@@ -81,7 +99,7 @@ Delimiter $$
 			delete from Clientes
             where Clientes.codigoCliente = codigoCliente;
 	end $$
-Delimiter;
+Delimiter ;
  
 delimiter $$
 create procedure sp_EditarClientes(in codigoCliente int, in nitCliente varchar(10), in nombreCliente varchar(50), 
@@ -117,8 +135,8 @@ begin
 end $$
 delimiter ;
 
-call sp_AgregarProveedores(01, '8465453', 'adrian', 'posadas', 'zona 10','diana', '758491', 'diana.com');
-call sp_AgregarProveedores (02, '984654145', 'jim', 'andre', 'zona 8','chikis', '1315646', 'chikis.gt');
+call sp_AgregarProveedores(1, '8465453', 'adrian', 'posadas', 'zona 10','diana', '758491', 'diana.com');
+call sp_AgregarProveedores (2, '984654145', 'jim', 'andre', 'zona 8','chikis', '1315646', 'chikis.gt') ;
 
 delimiter $$
 create procedure sp_ListarProveedores()
@@ -166,5 +184,155 @@ begin
         P.contactoPrincipal = contactoPrincipal,
         P.paginaWeb = paginaWeb
     where P.codigoProveedor = codigoProveedor;
+end $$
+delimiter ;
+
+-- Compras
+delimiter $$
+create procedure sp_AgregarCompras(
+    in numeroDocumento int,
+    in fechaDocumento date,
+    in descripcion varchar(60),
+    in totalDocumento decimal(10,2)
+)
+begin
+    insert into Compras(numeroDocumento, fechaDocumento, descripcion, totalDocumento)
+    values (numeroDocumento, fechaDocumento, descripcion, totalDocumento);
+end $$
+delimiter ;
+
+call sp_AgregarCompras(1, '2024-05-10', 'tortillas de harina', 12.3);
+call sp_AgregarCompras(2, '2024-05-27', 'tortillas de maíz', 15.2);
+
+delimiter $$
+create procedure sp_ListarCompras()
+begin
+    select
+        C.numeroDocumento,
+		C.fechaDocumento,
+		C.descripcion,
+		C.totalDocumento
+    from Compras C;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EliminarCompras(
+    in numeroDocumento int
+)
+begin
+    delete from Compras where numeroDocumento = numeroDocumento;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EditarCompras(
+    in numeroDocumento int,
+    in fechaDocumento date,
+    in descripcion varchar(60),
+    in totalDocumento decimal(10,2)
+)
+begin
+    update Compras C
+    set C.fechaDocumento = fechaDocumento,
+        C.descripcion = descripcion,
+        C.totalDocumento = totalDocumento
+    where C.numeroDocumento = numeroDocumento;
+end $$
+delimiter ;
+
+-- TipoProducto
+delimiter $$
+create procedure sp_AgregarTipoProducto(
+    in codigoTipoProducto int,
+    in descripcion varchar(45)
+)
+begin
+    insert into TipoProducto (codigoTipoProducto, descripcion) values (codigoTipoProducto, descripcion);
+end $$
+delimiter ;
+
+call sp_AgregarTipoProducto(1, 'pastas');
+call sp_AgregarTipoProducto(2, 'cereales');
+
+delimiter $$
+create procedure sp_ListarTipoProducto()
+begin
+    select
+		T.codigoTipoProducto,
+		T.descripcion
+	from TipoProducto T;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EliminarTipoProducto(
+    in codigoTipoProducto int
+)
+begin
+    delete from TipoProducto where TipoProducto.codigotipoproducto = codigoTipoProducto;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EditarTipoProducto(
+    in codigoTipoProducto int,
+    in descripcion varchar(45)
+)
+begin
+    update tipoproducto T
+    set
+		T.descripcion = descripcion 
+    where T.codigoTipoProducto = codigotipoproducto;
+end $$
+delimiter ;
+
+-- CargoEmpleado
+delimiter $$
+create procedure sp_AgregarCargoEmpleado(
+    in codigoCargoEmpleado  int,
+    in nombreCargo varchar(45),
+    in descripcionCargo  varchar(45)
+)
+begin
+    insert into CargoEmpleado (codigoCargoEmpleado, nombreCargo, descripcionCargo) values (codigoCargoEmpleado, nombreCargo, descripcionCargo);
+end $$
+delimiter ;
+
+call sp_AgregarCargoEmpleado(1, 'gerente', 'gerente de ventas');
+call sp_AgregarCargoEmpleado(2, 'general militar', 'general del peloton 2');
+
+delimiter $$
+create procedure sp_ListarCargoEmpleado()
+begin
+    select
+		C.codigoCargoEmpleado,
+		C.nombreCargo,
+        C.descripcionCargo
+	from CargoEmpleado C;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EliminarCargoEmpleado(
+    in codigoCargoEmpleado int
+)
+begin
+    delete from CargoEmpleado where CargoEmpleado.codigoCargoEmpleado = codigoCargoEmpleado;
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_EditarCargoEmpleado(
+    in codigoCargoEmpleado int,
+    in nombreCargo varchar(45),
+    in descripcionCargo  varchar(45)
+)
+begin
+    update CargoEmpleado C
+    set
+        C.nombreCargo = nombreCargo,
+        C.descripcionCargo  = descripcionCargo
+    where C.codigoCargoEmpleado = codigoCargoEmpleado;
 end $$
 delimiter ;

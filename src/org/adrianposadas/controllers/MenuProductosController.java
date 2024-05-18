@@ -55,9 +55,8 @@ public class MenuProductosController implements Initializable{
     
     @Override
 public void initialize(URL location, ResourceBundle resources) {
-    cmbCodProv.setItems(getProveedores());
 }
-
+/*
 public void cargarDatos() {
     tblProductos.setItems(getProductos());
 
@@ -116,4 +115,5 @@ private void seleccionarElementos() {
         txtExistencia.setEditable(true);
         cmbCodigoTipoP.setDisable(false); 
     }
+*/
 }
