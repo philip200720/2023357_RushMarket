@@ -214,16 +214,19 @@ public class MenuCargoEmpleadoController implements Initializable{
      
      public void guardar(){
         CargoEmpleado registro = new CargoEmpleado();
-        registro.setCodigoCargoEmpleado(Integer.parseInt(txtCodigoCargoEmpleado.getText()));
         registro.setNombreCargo(txtNombreCargoEmpleado.getText());
         registro.setDescripcionCargo(txtDescripcionCargoEmpleado.getText());
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarCargoEmpleado(?, ?, ?)}");
-            procedimiento.setInt(1, registro.getCodigoCargoEmpleado());
-            procedimiento.setString(2, registro.getNombreCargo());
-            procedimiento.setString(3, registro.getDescripcionCargo());
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarCargoEmpleado(?, ?)}");
+            procedimiento.setString(1, registro.getNombreCargo());
+            procedimiento.setString(2, registro.getDescripcionCargo());
             procedimiento.execute();
+            ResultSet generatedKeys = procedimiento.getGeneratedKeys();
+            if (generatedKeys.next()) {
+            registro.setCodigoCargoEmpleado(generatedKeys.getInt(1));
+            }
             listaClientes.add(registro);
+            cargarDatos();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -257,7 +260,6 @@ public class MenuCargoEmpleadoController implements Initializable{
     }
     
     public void activarControles() {
-        txtCodigoCargoEmpleado.setEditable(true);
         txtNombreCargoEmpleado.setEditable(true);
         txtDescripcionCargoEmpleado.setEditable(true);
     }

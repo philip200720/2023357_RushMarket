@@ -16,8 +16,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.adrianposadas.controllers.MenuCargoEmpleadoController;
 import org.adrianposadas.controllers.MenuClientesController;
+import org.adrianposadas.controllers.MenuCompraController;
+import org.adrianposadas.controllers.MenuEmailProveedorController;
 import org.adrianposadas.controllers.MenuPrincipalController;
 import org.adrianposadas.controllers.MenuProveedoresController;
+import org.adrianposadas.controllers.MenuTelefonoProveedorController;
 import org.adrianposadas.controllers.MenuTipoProductoController;
 import org.adrianposadas.controllers.ProgramadorController;
 
@@ -93,6 +96,15 @@ public class Main extends Application {
         }
     }
     
+    public void menuTelefonoProveedorView(){
+        try{
+            MenuTelefonoProveedorController menuTelefonoProveedorView = (MenuTelefonoProveedorController)cambiarEscena("MenuTelefonoProveedorView.fxml", 1280, 723);
+            menuTelefonoProveedorView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     public void menuTipoProductoView(){
         try{
             MenuTipoProductoController menuTipoProductoView = (MenuTipoProductoController)cambiarEscena("MenuTipoProductoView.fxml", 984, 553);
@@ -106,6 +118,24 @@ public class Main extends Application {
         try{
             MenuCargoEmpleadoController menuCargoEmpleadoView = (MenuCargoEmpleadoController)cambiarEscena("MenuCargoEmpleadoView.fxml", 984, 553);
             menuCargoEmpleadoView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuEmailProveedorView(){
+        try{
+            MenuEmailProveedorController menuEmailProveedorView = (MenuEmailProveedorController)cambiarEscena("MenuEmailProveedorView.fxml", 1260, 704);
+            menuEmailProveedorView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuCompraView(){
+        try{
+            MenuCompraController menuCompraView = (MenuCompraController)cambiarEscena("MenuCompraView.fxml", 1132, 634);
+            menuCompraView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

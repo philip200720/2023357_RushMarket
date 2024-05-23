@@ -129,6 +129,7 @@ public class MenuProveedoresController implements Initializable{
         switch (tipoOperacion) {
             case NINGUNO:
                 activarControles();
+                limpiarControles();
                 btnAgregarProveedor.setText("Guardar");
                 btnEliminarProveedor.setText("Cancelar");
                 btnEditarProveedor.setDisable(true);
@@ -148,6 +149,7 @@ public class MenuProveedoresController implements Initializable{
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
                 tipoOperacion = operaciones.NINGUNO;
+                cargarDatos();
                 break;
         }
     }
@@ -201,7 +203,7 @@ public class MenuProveedoresController implements Initializable{
             default:
                 if(tblProveedores.getSelectionModel().getSelectedItem() != null){
                     int ans = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion",
-                            "Elminar Clientes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            "Elminar Proveedor", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(ans == JOptionPane.YES_NO_OPTION){
                         try{
                             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EliminarProveedores(?)}");
@@ -263,7 +265,6 @@ public class MenuProveedoresController implements Initializable{
     
     public void guardar(){
         Proveedores registro = new Proveedores();
-        registro.setCodigoProveedor(Integer.parseInt(txtCodigoProveedor.getText()));
         registro.setNitProveedor(txtNitProveedor.getText());
         registro.setNombreProveedor(txtNombreProveedor.getText());
         registro.setApellidoProveedor(txtApellidoProveedor.getText());
@@ -272,16 +273,19 @@ public class MenuProveedoresController implements Initializable{
         registro.setContactoPrincipal(txtContactoPrincipal.getText());
         registro.setContactoPrincipal(txtPaginaWeb.getText());
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarProveedores(?, ?, ?, ?, ?, ?, ?, ?)}");
-            procedimiento.setInt(1, registro.getCodigoProveedor());
-            procedimiento.setString(2, registro.getNitProveedor());
-            procedimiento.setString(3, registro.getNombreProveedor());
-            procedimiento.setString(4, registro.getApellidoProveedor());
-            procedimiento.setString(5, registro.getDireccionProveedor());
-            procedimiento.setString(6, registro.getRazonSocial());
-            procedimiento.setString(7, registro.getContactoPrincipal());
-            procedimiento.setString(8, registro.getPaginaWeb());
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarProveedores(?, ?, ?, ?, ?, ?, ?)}");
+            procedimiento.setString(1, registro.getNitProveedor());
+            procedimiento.setString(2, registro.getNombreProveedor());
+            procedimiento.setString(3, registro.getApellidoProveedor());
+            procedimiento.setString(4, registro.getDireccionProveedor());
+            procedimiento.setString(5, registro.getRazonSocial());
+            procedimiento.setString(6, registro.getContactoPrincipal());
+            procedimiento.setString(7, registro.getPaginaWeb());
             procedimiento.execute();
+            ResultSet generatedKeys = procedimiento.getGeneratedKeys();
+            if (generatedKeys.next()) {
+            registro.setCodigoProveedor(generatedKeys.getInt(1));
+            }
             listaProveedores.add(registro);
         }catch(Exception e){
             e.printStackTrace();
@@ -311,7 +315,6 @@ public class MenuProveedoresController implements Initializable{
     }
     
     public void activarControles() {
-        txtCodigoProveedor.setEditable(true);
         txtNitProveedor.setEditable(true);
         txtNombreProveedor.setEditable(true);
         txtApellidoProveedor.setEditable(true);

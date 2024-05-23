@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="686.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianposadas.controllers.MenuPrincipalController">
    <children>
-      <ImageView fitHeight="715.0" fitWidth="1000.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="715.0" fitWidth="1000.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/FondoMenu.png" />
          </image>
@@ -20,6 +20,9 @@
             <items>
                   <MenuItem fx:id="btnClientes" mnemonicParsing="false" onAction="#clickPrincipalController" text="Clientes" />
                   <MenuItem fx:id="btnProveedores" mnemonicParsing="false" onAction="#clickPrincipalController" text="Proveedores" />
+                  <MenuItem fx:id="btnTelefonoProveedor" mnemonicParsing="false" onAction="#clickPrincipalController" text="Telefono Proveedor" />
+                  <MenuItem fx:id="btnEmailProveedor" mnemonicParsing="false" onAction="#clickPrincipalController" text="Email Proveedor" />
+                  <MenuItem fx:id="btnCompras" mnemonicParsing="false" onAction="#clickPrincipalController" text="Compras" />
                   <MenuItem fx:id="btnTipoProducto" mnemonicParsing="false" onAction="#clickPrincipalController" text="Tipo de Producto" />
                   <MenuItem fx:id="btnCargoEmpleado" mnemonicParsing="false" onAction="#clickPrincipalController" text="Cargo de Empleado" />
               <MenuItem fx:id="btnSalir" mnemonicParsing="false" onAction="#clickPrincipalController" text="Salir" />
