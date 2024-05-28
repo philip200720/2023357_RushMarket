@@ -145,7 +145,6 @@ public class MenuCompraController implements Initializable{
         Compras registro = new Compras();
         registro.setDescripcion(txtdescripcion.getText());
         registro.setFechaCompra(datepFechaCompra.getValue());
-        registro.setTotalCompra(Double.parseDouble(txtTotalCompra.getText()));
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarCompras (?, ?)}");
             procedimiento.setDate(1, java.sql.Date.valueOf(registro.getFechaCompra()));
@@ -156,7 +155,7 @@ public class MenuCompraController implements Initializable{
             registro.setCompraId(generatedKeys.getInt(1));
             }
             listaCompras.add(registro);
-
+            cargarDatos();
         } catch (Exception e) {
             e.printStackTrace();
         }
