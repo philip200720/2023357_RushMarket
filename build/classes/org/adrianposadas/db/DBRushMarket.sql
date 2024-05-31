@@ -862,7 +862,7 @@ create procedure sp_EditarFactura(
     in facturaId int,
     in estado varchar (50),
     in totalFactura decimal (10,2),
-    in fechaFactura int,
+    in fechaFactura date,
     in codigoCliente int,
     in empleadoId int)
 begin
