@@ -118,7 +118,7 @@
             <Label prefHeight="17.0" prefWidth="114.0" text="TotalCompra" GridPane.columnIndex="2" />
             <TextField fx:id="txtCompraId" editable="false" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" />
             <TextField fx:id="txtTotalCompra" editable="false" GridPane.columnIndex="3" />
-            <TextField fx:id="txtdescripcion" editable="false" prefHeight="25.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtDescripcion" editable="false" prefHeight="25.0" prefWidth="23.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="FechaCompra" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <DatePicker fx:id="datepFechaCompra" prefHeight="25.0" prefWidth="405.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          </children>

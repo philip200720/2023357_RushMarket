@@ -4,7 +4,9 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -43,7 +45,7 @@ public class MenuCompraController implements Initializable{
     @FXML
     private DatePicker datepFechaCompra;
     @FXML
-    private TextField txtdescripcion;
+    private TextField txtDescripcion;
     @FXML
     private TextField txtTotalCompra;
     @FXML
@@ -90,7 +92,7 @@ public class MenuCompraController implements Initializable{
     public void seleccionarElemento() {
         txtCompraId.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getCompraId()));
         datepFechaCompra.setValue((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getFechaCompra()));
-        txtdescripcion.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getDescripcion()));
+        txtDescripcion.setText((((Compras) tblCompras.getSelectionModel().getSelectedItem()).getDescripcion()));
         txtTotalCompra.setText(String.valueOf(((Compras) tblCompras.getSelectionModel().getSelectedItem()).getTotalCompra()));
     }
 
@@ -143,7 +145,7 @@ public class MenuCompraController implements Initializable{
 
     public void guardar() {
         Compras registro = new Compras();
-        registro.setDescripcion(txtdescripcion.getText());
+        registro.setDescripcion(txtDescripcion.getText());
         registro.setFechaCompra(datepFechaCompra.getValue());
         try {
             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarCompras (?, ?)}");
@@ -185,8 +187,14 @@ public class MenuCompraController implements Initializable{
                             procedimiento.execute();
                             limpiarControles();
                             listaCompras.remove(tblCompras.getSelectionModel().getSelectedItem());
+                        } catch (SQLIntegrityConstraintViolationException e) {
+                            JOptionPane.showMessageDialog(null, "No puedes eliminar un registro que está siendo referenciado");
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
                         } catch (Exception e) {
                             e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Se produjo un error: " + e.getMessage());
                         }
                     }
                 } else {
@@ -232,12 +240,13 @@ public class MenuCompraController implements Initializable{
 
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EditarCompras (?, ?, ?, ?)}");
             Compras registro = (Compras) tblCompras.getSelectionModel().getSelectedItem();
+            registro.setFechaCompra(datepFechaCompra.getValue());
+            registro.setDescripcion(txtDescripcion.getText());
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EditarCompras (?, ?, ?)}");
             procedimiento.setInt(1, registro.getCompraId());
             procedimiento.setDate(2, java.sql.Date.valueOf(registro.getFechaCompra()));
             procedimiento.setString(3, registro.getDescripcion());
-            procedimiento.setDouble(4, registro.getTotalCompra());
             procedimiento.execute();
             
         } catch (Exception e) {
@@ -263,19 +272,19 @@ public class MenuCompraController implements Initializable{
 
     public void desactivarControles() {
         txtCompraId.setEditable(false);
-        txtdescripcion.setEditable(false);
+        txtDescripcion.setEditable(false);
         datepFechaCompra.setEditable(false);
         txtTotalCompra.setEditable(false);
     }
 
     public void activarControles() {
-        txtdescripcion.setEditable(true);
+        txtDescripcion.setEditable(true);
         datepFechaCompra.setEditable(true);
     }
 
     public void limpiarControles() {
         txtCompraId.clear();
-        txtdescripcion.clear();
+        txtDescripcion.clear();
         datepFechaCompra.setValue(null);
         txtTotalCompra.clear();
         
@@ -291,4 +300,6 @@ public class MenuCompraController implements Initializable{
             escenarioPrincipal.menuPrincipalView();
         }
     }
+    
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 }
