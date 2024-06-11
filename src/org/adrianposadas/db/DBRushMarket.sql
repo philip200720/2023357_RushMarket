@@ -35,6 +35,7 @@ create table TelefonoProveedor(
     primary key PK_telefonoProveedorId (telefonoProveedorId),
     foreign key FK_telefonoCodigoProveedor (codigoProveedor)
 		references Proveedores(codigoProveedor)
+        on delete cascade
 );
 
 create table EmailProveedor(
@@ -45,6 +46,7 @@ create table EmailProveedor(
     primary key PK_emailProveedorId (emailProveedorId),
     foreign key FK_emailCodigoProveedor (codigoProveedor)
 		references Proveedores(codigoProveedor)
+        on delete cascade
 );
 
 create table TipoProducto (
@@ -65,9 +67,11 @@ create table Productos (
     codigoTipoDeProducto int,
     primary key PK_productoId (productoId),
     foreign key FK_codigoProveedor (codigoProveedor)
-		references Proveedores(codigoProveedor),
+		references Proveedores(codigoProveedor)
+        on delete cascade,
 	foreign key FK_codigoTipoProducto (codigoTipoDeProducto )
-		references TipoProducto (codigoTipoProducto )
+		references TipoProducto (codigoTipoProducto)
+        on delete cascade
 );
 
 create table Compras(
@@ -86,9 +90,11 @@ create table DetalleCompra(
     compraId int,
     primary key PK_detalleCompraId (detalleCompraId),
     foreign key FK_detalleCompraProductoId (productoId)
-		references Productos (productoId),
+		references Productos (productoId)
+        on delete cascade,
 	foreign key FK_compraId (compraId)
 		references Compras (compraId)
+        on delete cascade
 );
 
 create table CargoEmpleado(
@@ -109,6 +115,7 @@ create table Empleados(
     primary key PK_empleadoId (empleadoId),
     foreign key FK_cargo (cargoId)
 		references CargoEmpleado (codigoCargoEmpleado)
+        on delete cascade
 );
 
 create table Facturas(
@@ -120,9 +127,11 @@ create table Facturas(
     empleadoId int,
     primary key PK_facturaId (facturaId),
     foreign key FK_facturaClienteId (codigoCliente)
-		references Clientes (codigoCliente),
+		references Clientes (codigoCliente)
+        on delete cascade,
 	foreign key FK_facturaEmpleadoId (empleadoId)
 		references Empleados (empleadoId)
+        on delete cascade
 );
 
 create table Detallefactura (
@@ -133,9 +142,11 @@ create table Detallefactura (
     productoId int,
     Primary key PK_detalleFacturaId (detalleFacturaId),
     foreign key FK_detalleFacturaFacturaId (facturaId)
-		references Facturas (facturaId),
+		references Facturas (facturaId)
+        on delete cascade,
 	foreign key FK_detalleFacturaProductoId(productoId)
 		references Productos (productoId)
+        on delete cascade
 );
 
 -- CRUD
@@ -182,10 +193,12 @@ begin
 delimiter ;
 
 Delimiter $$
-	create procedure sp_EliminarClientes (in codigoCliente int)
-		begin 
+create procedure sp_EliminarClientes (
+	in _codigoCliente int
+)
+begin 
 			delete from Clientes
-            where Clientes.codigoCliente = codigoCliente;
+            where Clientes.codigoCliente = _codigoCliente;
 	end $$
 Delimiter ;
  
@@ -223,6 +236,25 @@ end $$
 delimiter ;
 
 delimiter $$
+create procedure sp_BuscarProveedores(
+	in _codigoProveedor int
+)
+begin
+    select
+        P.codigoProveedor,
+        P.nitProveedor,
+        P.nombreProveedor,
+        P.apellidoProveedor,
+        P.direccionProveedor,
+        P.razonSocial,
+        P.contactoPrincipal,
+        P.paginaWeb
+    from Proveedores P
+		where P.codigoProveedor = _codigoProveedor;
+end $$
+delimiter ;
+
+delimiter $$
 create procedure sp_ListarProveedores()
 begin
     select
@@ -240,10 +272,10 @@ delimiter ;
 
 delimiter $$
 create procedure sp_EliminarProveedores(
-    in codigoProveedor int
+    in _codigoProveedor int
 )
 begin
-    delete from Proveedores where codigoProveedor = codigoProveedor;
+    delete from Proveedores where codigoProveedor = _codigoProveedor;
 end $$
 delimiter ;
 
@@ -427,10 +459,10 @@ delimiter ;
 
 delimiter $$
 create procedure sp_EliminarTipoProducto(
-    in codigoTipoProducto int
+    in _codigoTipoProducto int
 )
 begin
-    delete from TipoProducto where TipoProducto.codigotipoproducto = codigoTipoProducto;
+    delete from TipoProducto where TipoProducto.codigotipoproducto = _codigoTipoProducto;
 end $$
 delimiter ;
 
@@ -507,10 +539,12 @@ delimiter ;
 
 -- Eliminar
 delimiter $$
-create procedure sp_EliminarProducto(in productoId int)
+create procedure sp_EliminarProducto(
+	in _productoId int
+)
 begin
     delete from Productos 
-    where productoId = productoId;
+    where productoId = _productoId;
 end $$
 delimiter ;
 
@@ -575,10 +609,10 @@ delimiter ;
 
 delimiter $$
 create procedure sp_EliminarCompras(
-    in compraId  int
+    in _compraId  int
 )
 begin
-    delete from Compras where compraId  = compraId ;
+    delete from Compras where compraId  = _compraId ;
 end $$
 delimiter ;
 

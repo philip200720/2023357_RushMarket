@@ -8,6 +8,7 @@ package org.adrianposadas.controllers;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -127,12 +128,15 @@ public class MenuClientesController implements Initializable {
         switch (tipoOperacion) {
             case NINGUNO:
                 activarControles();
+                limpiarControles();
                 btnAgregarCliente.setText("Guardar");
                 btnEliminarCliente.setText("Cancelar");
                 btnEditarCliente.setDisable(true);
                 btnReportesCliente.setDisable(true);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditarIcono.setOpacity(0.5);
+                imgReportesIcono.setOpacity(0.5);
                 tipoOperacion = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -145,6 +149,8 @@ public class MenuClientesController implements Initializable {
                 btnReportesCliente.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -154,12 +160,15 @@ public class MenuClientesController implements Initializable {
         switch (tipoOperacion){
             case NINGUNO:
                 if(tblClientes.getSelectionModel().getSelectedItem() != null){
+                    seleccionarElemento();
                     btnEditarCliente.setText("Actualizar");
                     btnReportesCliente.setText("Cancelar");
                     btnEliminarCliente.setDisable(true);
                     btnAgregarCliente.setDisable(true);
                     imgEditarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportesIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregarIcono.setOpacity(0.5);
+                    imgEliminarIcono.setOpacity(0.5);
                     activarControles();
                     txtCodigoCliente.setEditable(false);
                     tipoOperacion = operaciones.ACTUALIZAR;
@@ -177,6 +186,8 @@ public class MenuClientesController implements Initializable {
                 btnEliminarCliente.setDisable(false);
                 imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregarIcono.setOpacity(1);
+                imgEliminarIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -194,11 +205,13 @@ public class MenuClientesController implements Initializable {
                 btnReportesCliente.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 break;
             default:
                 if(tblClientes.getSelectionModel().getSelectedItem() != null){
-                    int ans = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion",
+                    int ans = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?" + "\n" + "Se eliminará todos los registros relacionados.",
                             "Elminar Clientes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(ans == JOptionPane.YES_NO_OPTION){
                         try{
@@ -207,7 +220,7 @@ public class MenuClientesController implements Initializable {
                             procedimiento.execute();
                             limpiarControles();
                             listaClientes.remove(tblClientes.getSelectionModel().getSelectedItem());
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -228,6 +241,8 @@ public class MenuClientesController implements Initializable {
                  btnEliminarCliente.setDisable(false);
                  imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                  imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                 imgAgregarIcono.setOpacity(1);
+                 imgEliminarIcono.setOpacity(1);
                  tipoOperacion = operaciones.NINGUNO;
                  break;
          }
@@ -235,15 +250,15 @@ public class MenuClientesController implements Initializable {
      }
      
      public void guardar(){
-        Clientes registro = new Clientes();
-        registro.setNitCliente(txtNitCliente.getText());
-        registro.setNombreCliente(txtNombreCliente.getText());
-        registro.setApellidoCliente(txtApellidoCliente.getText());
-        registro.setDireccionCliente(txtDireccionCliente.getText());
-        registro.setTelefonoCliente(txtTelefonoCliente.getText());
-        registro.setCorreoCliente(txtCorreoCliente.getText());
         try{
             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarClientes(?, ?, ?, ?, ?, ?)}");
+            Clientes registro = new Clientes();
+            registro.setNitCliente(txtNitCliente.getText());
+            registro.setNombreCliente(txtNombreCliente.getText());
+            registro.setApellidoCliente(txtApellidoCliente.getText());
+            registro.setDireccionCliente(txtDireccionCliente.getText());
+            registro.setTelefonoCliente(txtTelefonoCliente.getText());
+            registro.setCorreoCliente(txtCorreoCliente.getText());
             procedimiento.setString(1, registro.getNitCliente());
             procedimiento.setString(2, registro.getNombreCliente());
             procedimiento.setString(3, registro.getApellidoCliente());

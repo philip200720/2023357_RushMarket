@@ -136,6 +136,8 @@ public class MenuProveedoresController implements Initializable{
                 btnReportesProveedor.setDisable(true);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditarIcono.setOpacity(0.5);
+                imgReportesIcono.setOpacity(0.5);
                 tipoOperacion = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -148,6 +150,8 @@ public class MenuProveedoresController implements Initializable{
                 btnReportesProveedor.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -158,12 +162,15 @@ public class MenuProveedoresController implements Initializable{
         switch (tipoOperacion){
             case NINGUNO:
                 if(tblProveedores.getSelectionModel().getSelectedItem() != null){
+                    seleccionarElemento();
                     btnEditarProveedor.setText("Actualizar");
                     btnReportesProveedor.setText("Cancelar");
                     btnEliminarProveedor.setDisable(true);
                     btnAgregarProveedor.setDisable(true);
                     imgEditarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportesIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregarIcono.setOpacity(0.5);
+                    imgEliminarIcono.setOpacity(0.5);
                     activarControles();
                     txtCodigoProveedor.setEditable(false);
                     tipoOperacion = operaciones.ACTUALIZAR;
@@ -181,6 +188,8 @@ public class MenuProveedoresController implements Initializable{
                 btnEliminarProveedor.setDisable(false);
                 imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregarIcono.setOpacity(1);
+                imgEliminarIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -198,11 +207,13 @@ public class MenuProveedoresController implements Initializable{
                 btnReportesProveedor.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 break;
             default:
                 if(tblProveedores.getSelectionModel().getSelectedItem() != null){
-                    int ans = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion",
+                    int ans = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?" + "\n" + "Se eliminará todos los registros relacionados.",
                             "Elminar Proveedor", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(ans == JOptionPane.YES_NO_OPTION){
                         try{
@@ -232,6 +243,8 @@ public class MenuProveedoresController implements Initializable{
                  btnEliminarProveedor.setDisable(false);
                  imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                  imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                 imgAgregarIcono.setOpacity(1);
+                 imgEliminarIcono.setOpacity(1);
                  tipoOperacion = operaciones.NINGUNO;
                  break;
          }

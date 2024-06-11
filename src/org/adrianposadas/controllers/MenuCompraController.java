@@ -126,6 +126,8 @@ public class MenuCompraController implements Initializable{
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditar.setOpacity(0.5);
+                imgReportes.setOpacity(0.5);
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -138,6 +140,8 @@ public class MenuCompraController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -175,11 +179,14 @@ public class MenuCompraController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
                 if (tblCompras.getSelectionModel().getSelectedItem() != null) {
-                    int respuesta = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion", "Eliminar compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?" + "\n" + "Se eliminará todos los registros relacionados.",
+                            "Eliminar compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if (respuesta == JOptionPane.YES_NO_OPTION) {
                         try {
                             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EliminarCompras (?)}");
@@ -187,14 +194,8 @@ public class MenuCompraController implements Initializable{
                             procedimiento.execute();
                             limpiarControles();
                             listaCompras.remove(tblCompras.getSelectionModel().getSelectedItem());
-                        } catch (SQLIntegrityConstraintViolationException e) {
-                            JOptionPane.showMessageDialog(null, "No puedes eliminar un registro que está siendo referenciado");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Se produjo un error: " + e.getMessage());
                         }
                     }
                 } else {
@@ -205,15 +206,17 @@ public class MenuCompraController implements Initializable{
 
     public void editar() {
         switch (tipoDeOperaciones) {
-
             case NINGUNO:
                 if (tblCompras.getSelectionModel().getSelectedItem() != null) {
+                    seleccionarElemento();
                     btnEditar.setText("Actualizar");
                     btnReportes.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     imgEditar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportes.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregar.setOpacity(0.5);
+                    imgEliminar.setOpacity(0.5);
                     activarControles();
                     txtCompraId.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
@@ -229,6 +232,8 @@ public class MenuCompraController implements Initializable{
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 desactivarControles();
                 limpiarControles();
                 tipoDeOperaciones = operaciones.NINGUNO;
@@ -264,7 +269,9 @@ public class MenuCompraController implements Initializable{
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
-                imgReportes.setImage(new Image("/org/adrianposadas/Images/reportes.png"));
+                imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }

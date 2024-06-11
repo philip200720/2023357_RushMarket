@@ -100,12 +100,15 @@ public class MenuTipoProductoController implements Initializable{
         switch (tipoOperacion) {
             case NINGUNO:
                 activarControles();
+                limpiarControles();
                 btnAgregarTipoProducto.setText("Guardar");
                 btnEliminarTipoProducto.setText("Cancelar");
                 btnEditarTipoProducto.setDisable(true);
                 btnReportesTipoProducto.setDisable(true);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditarIcono.setOpacity(0.5);
+                imgReportesIcono.setOpacity(0.5);
                 tipoOperacion = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -118,7 +121,10 @@ public class MenuTipoProductoController implements Initializable{
                 btnReportesTipoProducto.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
+                cargarDatos();
                 break;
         }
     }
@@ -126,12 +132,15 @@ public class MenuTipoProductoController implements Initializable{
         switch (tipoOperacion){
             case NINGUNO:
                 if(tblTipoProducto.getSelectionModel().getSelectedItem() != null){
+                    seleccionarElemento();
                     btnEditarTipoProducto.setText("Actualizar");
                     btnReportesTipoProducto.setText("Cancelar");
                     btnEliminarTipoProducto.setDisable(true);
                     btnAgregarTipoProducto.setDisable(true);
                     imgEditarIcono.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportesIcono.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregarIcono.setOpacity(0.5);
+                    imgEliminarIcono.setOpacity(0.5);
                     activarControles();
                     txtCodigoTipoProducto.setEditable(false);
                     tipoOperacion = operaciones.ACTUALIZAR;
@@ -149,6 +158,8 @@ public class MenuTipoProductoController implements Initializable{
                 btnEliminarTipoProducto.setDisable(false);
                 imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregarIcono.setOpacity(1);
+                imgEliminarIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -166,11 +177,13 @@ public class MenuTipoProductoController implements Initializable{
                 btnReportesTipoProducto.setDisable(false);
                 imgAgregarIcono.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminarIcono.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditarIcono.setOpacity(1);
+                imgReportesIcono.setOpacity(1);
                 tipoOperacion = operaciones.NINGUNO;
                 break;
             default:
                 if(tblTipoProducto.getSelectionModel().getSelectedItem() != null){
-                    int ans = JOptionPane.showConfirmDialog(null, "Confirmar eliminacion",
+                    int ans = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este registro?" + "\n" + "Se eliminará todos los registros relacionados.",
                             "Elminar Clientes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(ans == JOptionPane.YES_NO_OPTION){
                         try{
@@ -200,6 +213,8 @@ public class MenuTipoProductoController implements Initializable{
                  btnEliminarTipoProducto.setDisable(false);
                  imgEditarIcono.setImage(new Image("/org/adrianposadas/images/editar.png"));
                  imgReportesIcono.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                 imgAgregarIcono.setOpacity(1);
+                 imgEliminarIcono.setOpacity(1);
                  tipoOperacion = operaciones.NINGUNO;
                  break;
          }
@@ -208,13 +223,15 @@ public class MenuTipoProductoController implements Initializable{
      
      public void guardar(){
         TipoProducto registro = new TipoProducto();
-        registro.setCodigoTipoProducto(Integer.parseInt(txtCodigoTipoProducto.getText()));
         registro.setDescripcion(txtDescripcion.getText());
         try{
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarTipoProducto(?, ?)}");
-            procedimiento.setInt(1, registro.getCodigoTipoProducto());
-            procedimiento.setString(2, registro.getDescripcion());
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarTipoProducto(?)}");
+            procedimiento.setString(1, registro.getDescripcion());
             procedimiento.execute();
+            ResultSet generatedKeys = procedimiento.getGeneratedKeys();
+            if (generatedKeys.next()) {
+            registro.setCodigoTipoProducto(generatedKeys.getInt(1));
+            }
             listaTipoProducto.add(registro);
         }catch(Exception e){
             e.printStackTrace();
@@ -245,7 +262,6 @@ public class MenuTipoProductoController implements Initializable{
     }
     
     public void activarControles() {
-        txtCodigoTipoProducto.setEditable(true);
         txtDescripcion.setEditable(true);
     }
 

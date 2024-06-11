@@ -3,6 +3,7 @@ package org.adrianposadas.controllers;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -21,7 +22,6 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.adrianposadas.beans.EmailProveedor;
 import org.adrianposadas.beans.Proveedores;
-import org.adrianposadas.beans.TelefonoProveedor;
 import org.adrianposadas.db.Conexion;
 import org.adrianposadas.system.Main;
 
@@ -163,6 +163,8 @@ public class MenuEmailProveedorController implements Initializable{
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditar.setOpacity(0.5);
+                imgReportes.setOpacity(0.5);
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -175,6 +177,8 @@ public class MenuEmailProveedorController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
@@ -213,6 +217,8 @@ public class MenuEmailProveedorController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -239,12 +245,15 @@ public class MenuEmailProveedorController implements Initializable{
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 if (tblEmailProveedor.getSelectionModel().getSelectedItem() != null) {
+                    seleccionarElemento();
                     btnEditar.setText("Actualizar");
                     btnReportes.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     imgEditar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportes.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregar.setOpacity(0.5);
+                    imgEliminar.setOpacity(0.5);
                     activarControles();
                     txtEmailProveedorId.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
@@ -260,6 +269,8 @@ public class MenuEmailProveedorController implements Initializable{
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 desactivarControles();
                 limpiarControles();
                 tipoDeOperaciones = operaciones.NINGUNO;
@@ -298,6 +309,8 @@ public class MenuEmailProveedorController implements Initializable{
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }

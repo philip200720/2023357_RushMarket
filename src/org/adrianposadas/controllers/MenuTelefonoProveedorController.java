@@ -21,7 +21,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
-import org.adrianposadas.beans.EmailProveedor;
 import org.adrianposadas.beans.Proveedores;
 import org.adrianposadas.beans.TelefonoProveedor;
 import org.adrianposadas.db.Conexion;
@@ -170,6 +169,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                 btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                imgEditar.setOpacity(0.5);
+                imgReportes.setOpacity(0.5);
                 tipoDeOperaciones = operaciones.ACTUALIZAR;
                 break;
             case ACTUALIZAR:
@@ -182,6 +183,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 cargarDatos();
                 break;
@@ -222,6 +225,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                 btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
+                imgEditar.setOpacity(1);
+                imgReportes.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
             default:
@@ -234,14 +239,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                             procedimiento.execute();
                             limpiarControles();
                             listaTelefonoProveedor.remove(tblTelefonoProveedor.getSelectionModel().getSelectedItem());
-                        } catch (SQLIntegrityConstraintViolationException e) {
-                            JOptionPane.showMessageDialog(null, "No puedes eliminar un registro que está siendo referenciado");
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
                         } catch (Exception e) {
                             e.printStackTrace();
-                            JOptionPane.showMessageDialog(null, "Se produjo un error: " + e.getMessage());
                         }
                     }
                 } else {
@@ -254,12 +253,15 @@ public class MenuTelefonoProveedorController implements Initializable{
         switch (tipoDeOperaciones) {
             case NINGUNO:
                 if (tblTelefonoProveedor.getSelectionModel().getSelectedItem() != null) {
+                    seleccionarElemento();
                     btnEditar.setText("Actualizar");
                     btnReportes.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     imgEditar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                     imgReportes.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
+                    imgAgregar.setOpacity(0.5);
+                    imgEliminar.setOpacity(0.5);
                     activarControles();
                     txtTelefonoProveedorId.setEditable(false);
                     tipoDeOperaciones = operaciones.ACTUALIZAR;
@@ -275,6 +277,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 desactivarControles();
                 limpiarControles();
                 cargarDatos();
@@ -285,14 +289,15 @@ public class MenuTelefonoProveedorController implements Initializable{
     }
 
     public void actualizar() {
-        TelefonoProveedor registro = (TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem();
-        registro.setTelefonoProveedorId(((TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem()).getTelefonoProveedorId());
-        registro.setNumeroPrincipal(txtNumeroPrincipal.getText());
-        registro.setNumeroSecundario(txtNumeroSecundario.getText());
-        registro.setObservaciones(txtObservaciones.getText());
-        registro.setCodigoProveedor(((Proveedores) cmbCodigoProveedor.getValue()).getCodigoProveedor());
+        
         try {
+            TelefonoProveedor registro = (TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem();
             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EditarTelefonoProveedor (?, ?, ?, ?, ?)}");
+            registro.setTelefonoProveedorId(((TelefonoProveedor) tblTelefonoProveedor.getSelectionModel().getSelectedItem()).getTelefonoProveedorId());
+            registro.setNumeroPrincipal(txtNumeroPrincipal.getText());
+            registro.setNumeroSecundario(txtNumeroSecundario.getText());
+            registro.setObservaciones(txtObservaciones.getText());
+            registro.setCodigoProveedor(((Proveedores) cmbCodigoProveedor.getValue()).getCodigoProveedor());
             procedimiento.setInt(1, registro.getTelefonoProveedorId());
             procedimiento.setString(2, registro.getNumeroPrincipal());
             procedimiento.setString(3, registro.getNumeroSecundario());
@@ -316,6 +321,8 @@ public class MenuTelefonoProveedorController implements Initializable{
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
                 imgReportes.setImage(new Image("/org/adrianposadas/images/reportes.png"));
+                imgAgregar.setOpacity(1);
+                imgEliminar.setOpacity(1);
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
