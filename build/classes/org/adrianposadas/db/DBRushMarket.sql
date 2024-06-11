@@ -223,6 +223,23 @@ end $$
 delimiter ;
 
 delimiter $$
+create procedure sp_BuscarProveedores(in codigoProveedor int)
+begin
+    select
+        P.codigoProveedor,
+        P.nitProveedor,
+        P.nombreProveedor,
+        P.apellidoProveedor,
+        P.direccionProveedor,
+        P.razonSocial,
+        P.contactoPrincipal,
+        P.paginaWeb
+    from Proveedores P
+	where P.codigoProveedor = codigoProveedor;
+end $$
+delimiter ;
+
+delimiter $$
 create procedure sp_ListarProveedores()
 begin
     select
@@ -862,7 +879,7 @@ create procedure sp_EditarFactura(
     in facturaId int,
     in estado varchar (50),
     in totalFactura decimal (10,2),
-    in fechaFactura int,
+    in fechaFactura date,
     in codigoCliente int,
     in empleadoId int)
 begin
@@ -958,7 +975,7 @@ begin
     set precioUnitario = (new.costoUnitario * 1.40),
 		precioDocena = (new.costoUnitario * 1.35),
         precioMayor = (new.costoUnitario * 1.25),
-        existencia = new.cantidad
+        existencia = (existencia + new.cantidad)
 	where productoId = new.productoId;
     
 	select (costoUnitario * new.cantidad) into _totalCompra
@@ -971,7 +988,7 @@ begin
 end $$
 delimiter ;
     
--- --------------------------------------- actualizar compra 
+-- --------------------------------------- actualizar detalle compra 
 delimiter $$
 create trigger tr_DetalleCompra_After_Update after update on DetalleCompra
 for each row
@@ -982,7 +999,7 @@ begin
     set precioUnitario = (new.costoUnitario * 1.40),
 		precioDocena = (new.costoUnitario * 1.35),
         precioMayor = (new.costoUnitario * 1.25)
-	where productoId = new.productoId;
+	where productoId = (existencia + new.cantidad);
     
 	select (costoUnitario * cantidad) into _totalCompra
     from DetalleCompra

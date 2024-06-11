@@ -3,6 +3,8 @@ package org.adrianposadas.controllers;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -222,8 +224,14 @@ public class MenuProveedoresController implements Initializable{
                             procedimiento.execute();
                             limpiarControles();
                             listaProveedores.remove(tblProveedores.getSelectionModel().getSelectedItem());
-                        }catch (Exception e){
+                        } catch (SQLIntegrityConstraintViolationException e) {
+                            JOptionPane.showMessageDialog(null, "No puedes eliminar un registro que está siendo referenciado");
+                        } catch (SQLException e) {
                             e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Error de base de datos: " + e.getMessage());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            JOptionPane.showMessageDialog(null, "Se produjo un error: " + e.getMessage());
                         }
                     }
                 }else{
