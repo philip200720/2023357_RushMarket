@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="718.0" fitWidth="1275.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/White%20and%20Blue%20Professional%20Modern%20Technology%20Pitch%20Deck%20Presentation%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="labelTitulo" stylesheets="@../source/Proyecto2023357CSS.css" text="Productos" />
+      <GridPane layoutX="14.0" layoutY="154.0" prefHeight="433.0" prefWidth="207.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#agregar" stylesheets="@../source/Proyecto2023357CSS.css" text="Agregar">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnEliminar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#eliminar" stylesheets="@../source/Proyecto2023357CSS.css" text="Eliminar" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnReportes" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#reportes" stylesheets="@../source/Proyecto2023357CSS.css" text="Reportes" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <ImageView fx:id="imgAgregar" fitHeight="33.0" fitWidth="37.0" onDragDetected="#agregar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/agregar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgReportes" fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../images/reportes.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnEditar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#editar" stylesheets="@../source/Proyecto2023357CSS.css" text="Editar" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <ImageView fx:id="imgEliminar" fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/eliminar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgEditar" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../images/editar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Button fx:id="btnHome" layoutX="33.0" layoutY="614.0" mnemonicParsing="false" onAction="#Home" prefHeight="50.0" prefWidth="73.0" style="-fx-background-color: 100;">
+         <graphic>
+            <ImageView fitHeight="57.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="tblTelefonoProveedor" layoutX="234.0" layoutY="257.0" onMouseClicked="#seleccionarElemento" prefHeight="446.0" prefWidth="1022.0" stylesheets="@../source/Proyecto2023357CSS.css">
+         <columns>
+            <TableColumn fx:id="colProductoId" prefWidth="77.0" text="productoId" />
+            <TableColumn fx:id="colDescripcionProducto" minWidth="0.0" prefWidth="193.0" text="descripcionProducto" />
+            <TableColumn fx:id="colPrecioUnitario" minWidth="0.0" prefWidth="102.0" text="precioUnitario" />
+            <TableColumn fx:id="colPrecioDocena" prefWidth="99.0" text="precioDocena" />
+            <TableColumn fx:id="colPrecioMayor" prefWidth="98.0" text="precioMayor" />
+            <TableColumn fx:id="colImagenProducto" prefWidth="106.0" text="imagenProducto" />
+            <TableColumn fx:id="colExistencia" prefWidth="87.0" text="existencia" />
+            <TableColumn fx:id="colCodigoProveedor" prefWidth="119.0" text="codigoProveedor" />
+            <TableColumn fx:id="colCodigoTipoDeProducto" prefWidth="140.0" text="codigoTipoDeProducto" />
+         </columns>
+         <styleClass>
+            <String fx:value="table-row-cell1" />
+            <String fx:value="column-header-background" />
+            <String fx:value="table-view1" />
+         </styleClass>
+      </TableView>
+      <GridPane layoutX="234.0" layoutY="166.0" prefHeight="65.0" prefWidth="762.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="119.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.0" minWidth="10.0" prefWidth="186.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="0.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="280.0" minWidth="10.0" prefWidth="278.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="102.0" text="Tipo de producto" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="114.0" text="Descripción" GridPane.columnIndex="2" />
+            <TextField fx:id="txtDescripcion" editable="false" GridPane.columnIndex="3" />
+            <Label text="Proveedor" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbProveedor" prefHeight="25.0" prefWidth="303.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label text="ID" />
+            <TextField fx:id="txtProductoId" editable="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cmbTipoProducto" prefHeight="25.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

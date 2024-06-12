@@ -61,7 +61,7 @@ create table Productos (
     precioUnitario decimal(10,2) default 0,
     precioDocena decimal(10,2) default 0,
     precioMayor decimal(10,2) default 0,
-    imagenProducto varchar (45),
+    imagenProducto varchar (45) default "[Sin imagen]",
     existencia int default 0,
     codigoProveedor int,
     codigoTipoDeProducto int,
@@ -236,13 +236,9 @@ end $$
 delimiter ;
 
 delimiter $$
-<<<<<<< HEAD
 create procedure sp_BuscarProveedores(
 	in _codigoProveedor int
 )
-=======
-create procedure sp_BuscarProveedores(in codigoProveedor int)
->>>>>>> bd01a6e2744f4196c9638ffdefa50ccca6138d27
 begin
     select
         P.codigoProveedor,
@@ -254,11 +250,7 @@ begin
         P.contactoPrincipal,
         P.paginaWeb
     from Proveedores P
-<<<<<<< HEAD
 		where P.codigoProveedor = _codigoProveedor;
-=======
-	where P.codigoProveedor = codigoProveedor;
->>>>>>> bd01a6e2744f4196c9638ffdefa50ccca6138d27
 end $$
 delimiter ;
 
@@ -529,7 +521,7 @@ delimiter ;
 
  -- Buscar
 delimiter $$
-create procedure sp_BuscarProductos (in  productoId int)
+create procedure sp_BuscarProductos (in productoId int)
 begin
 	select
 	P.descripcionProducto,
@@ -571,20 +563,12 @@ delimiter $$
 create procedure sp_EditarProducto(
 	in productoId int,
 	in descripcionProducto varchar(100),
-    in precioUnitario decimal(10,2),
-    in precioDocena decimal(10,2),
-    in precioMayor decimal(10,2),
-    in imagenProducto varchar(45),
     in codigoProveedor int,
     in codigoTipoDeProducto int)
 begin 
 		Update Productos  P
 		set 		
 		P.descripcionProducto = descripcionProducto,
-        P.precioUnitario = precioUnitario,
-        P.precioDocena = precioDocena,
-		P.precioMayor = precioMayor,
-		P.imagenProducto = imagenProducto,
 		P.codigoProveedor = codigoProveedor,
 		P.codigoTipoDeProducto = codigoTipoDeProducto
         where p.productoId = productoId;
@@ -1083,8 +1067,8 @@ call sp_AgregarEmailProveedor('candy@gmail.com', 'correo personal', 2);
 call sp_AgregarTipoProducto ('Cereal');
 call sp_AgregarTipoProducto ('Lacteo');
 
-call sp_AgregarProductos ('Cereal de chocolate', '1010100110', 1, 1);
-call sp_AgregarProductos ('Yogurt', '0101010101', 2, 2);
+call sp_AgregarProductos ('Cereal de chocolate', '[Sin imagen]', 1, 1);
+call sp_AgregarProductos ('Yogurt', '[Sin imagen]', 2, 2);
 
 call sp_AgregarCompras('2022-06-20', 'Compra por mayor de cereal');
 call sp_AgregarCompras('2023-01-28', 'compra por mayor de Yogurt');

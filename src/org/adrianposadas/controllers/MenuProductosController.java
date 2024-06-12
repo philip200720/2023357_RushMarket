@@ -32,31 +32,26 @@ public class MenuProductosController implements Initializable{
     private ObservableList <Productos> listaProducto;
     private ObservableList <Proveedores> listaProveedor;
     private ObservableList <TipoProducto> listaTipoProducto;
-    @FXML private TextField txtCodigoProd;
-@FXML private TextField txtDescripcion;
-@FXML private TextField txtPrecio;
-@FXML private TextField txtExistencia;
-@FXML private TextField txtPrecioD;
-@FXML private ComboBox cmbProductos;
-@FXML private ComboBox cmbCodProv;
-@FXML private ComboBox cmbCodigoTipoP;
-@FXML private TableColumn colCodProd;
-@FXML private TableColumn colDescProd;
-@FXML private TableColumn colPrecioC;
-@FXML private TableColumn colExistenciaC; 
-@FXML private TableColumn colPrecioDc; 
-@FXML TableView tblProductos; 
-@FXML TableView tblCompras; 
-@FXML private TableColumn colCodProv; 
-@FXML private Button btnAgregar; 
-@FXML private Button btnEliminar; 
-@FXML private Button btnModificar; 
+    @FXML private TextField txtProductoId;
+    @FXML private TextField txtDescripcion;
+    @FXML private ComboBox cmbProveedor;
+    @FXML private ComboBox cmbTipoProducto;
+    @FXML private TableColumn colCodProd;
+    @FXML private TableColumn colDescProd;
+    @FXML private TableColumn colProductoId;
+    @FXML private TableColumn colDescripcionProducto; 
+    @FXML private TableColumn colPrecioUnitario; 
+    @FXML TableView tblProductos; 
+    @FXML TableView tblCompras; 
+    @FXML private TableColumn colCodProv; 
+    @FXML private Button btnAgregar; 
+    @FXML private Button btnEliminar; 
+    @FXML private Button btnModificar; 
 
     
     @Override
 public void initialize(URL location, ResourceBundle resources) {
 }
-/*
 public void cargarDatos() {
     tblProductos.setItems(getProductos());
 
@@ -68,7 +63,7 @@ public void cargarDatos() {
 }
 
 private void seleccionarElementos() {
-    txtCodigoProd.setText(((Productos)cbProductos.getSelectedItem()).getIdProducto().toString());
+    txtProductoId.setText(((Productos)cbProductos.getSelectedItem()).getIdProducto().toString());
     txtDescripcion.setText(((Productos)cbProductos.getSelectedItem()).getDescripcionProducto());
     txtPrecio.setText(String.valueOf(((Productos)cbProductos.getSelectedItem()).getPrecioUnitario()));
     txtPrecioD.setText(String.valueOf(((Productos)cbProductos.getSelectedItem()).getPrecioCosto()));
@@ -101,19 +96,18 @@ private void seleccionarElementos() {
     }
     
     public void desactivarControles(){
-    txtCodigoProd.setEditable(false);
+    txtProductoId.setEditable(false);
     txtDescripcion.setEditable(false);
     txtPrecio.setEditable(false);
     txtExistencia.setEditable(false);
-    cmbCodigoTipoP.setDisable(true);
+    cmbTipoProducto.setDisable(true);
     }
 
     public void activarControles(){
-        txtCodigoProd.setEditable(true);
+        txtProductoId.setEditable(true);
         txtDescripcion.setEditable(true);
         txtPrecio.setEditable(true);
         txtExistencia.setEditable(true);
-        cmbCodigoTipoP.setDisable(false); 
+        cmbTipoProducto.setDisable(false); 
     }
-*/
 }
