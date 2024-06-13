@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="1275.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianposadas.controllers.MenuProductosController">
    <children>
       <ImageView fitHeight="718.0" fitWidth="1275.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -89,7 +88,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TableView fx:id="tblTelefonoProveedor" layoutX="234.0" layoutY="257.0" onMouseClicked="#seleccionarElemento" prefHeight="446.0" prefWidth="1022.0" stylesheets="@../source/Proyecto2023357CSS.css">
+      <TableView fx:id="tblProductos" layoutX="234.0" layoutY="257.0" onMouseClicked="#seleccionarElemento" prefHeight="446.0" prefWidth="1022.0" stylesheets="@../source/Proyecto2023357CSS.css">
          <columns>
             <TableColumn fx:id="colProductoId" prefWidth="77.0" text="productoId" />
             <TableColumn fx:id="colDescripcionProducto" minWidth="0.0" prefWidth="193.0" text="descripcionProducto" />
@@ -99,7 +98,7 @@
             <TableColumn fx:id="colImagenProducto" prefWidth="106.0" text="imagenProducto" />
             <TableColumn fx:id="colExistencia" prefWidth="87.0" text="existencia" />
             <TableColumn fx:id="colCodigoProveedor" prefWidth="119.0" text="codigoProveedor" />
-            <TableColumn fx:id="colCodigoTipoDeProducto" prefWidth="140.0" text="codigoTipoDeProducto" />
+            <TableColumn fx:id="colCodigoTipoProducto" prefWidth="140.0" text="codigoTipoProducto" />
          </columns>
          <styleClass>
             <String fx:value="table-row-cell1" />
@@ -123,10 +122,10 @@
             <Label prefHeight="17.0" prefWidth="114.0" text="Descripción" GridPane.columnIndex="2" />
             <TextField fx:id="txtDescripcion" editable="false" GridPane.columnIndex="3" />
             <Label text="Proveedor" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ComboBox fx:id="cmbProveedor" prefHeight="25.0" prefWidth="303.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbProveedor" disable="true" prefHeight="25.0" prefWidth="303.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label text="ID" />
             <TextField fx:id="txtProductoId" editable="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="cmbTipoProducto" prefHeight="25.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbTipoProducto" disable="true" prefHeight="25.0" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

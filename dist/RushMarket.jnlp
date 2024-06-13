@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="RushMarket.jar" size="3335442" download="eager" />
+    <jar href="RushMarket.jar" size="3342954" download="eager" />
     <jar href="lib\c3p0-0.9.1-pre6.jar" size="531005" download="eager" />
     <jar href="lib\jasperreports-5.6.0.jar" size="4989676" download="eager" />
     <jar href="lib\jboss-common-jdbc-wrapper-src.jar" size="35342" download="eager" />
