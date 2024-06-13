@@ -3,7 +3,6 @@ package org.adrianposadas.controllers;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -377,6 +376,8 @@ public class MenuProductosController implements Initializable{
     }
 
     public void seleccionarElemento() {
+        cmbProveedor.setDisable(false);
+        cmbTipoProducto.setDisable(false);
         txtProductoId.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getProductoId()));
         txtDescripcion.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getDescripcionProducto());
         cmbProveedor.getSelectionModel().select(buscarProveedor(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));
