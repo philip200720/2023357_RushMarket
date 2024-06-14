@@ -61,7 +61,7 @@ create table Productos (
     precioUnitario decimal(10,2) default 0,
     precioDocena decimal(10,2) default 0,
     precioMayor decimal(10,2) default 0,
-    imagenProducto varchar (45) default "[Sin imagen]",
+    imagenProducto varchar (45) default '[Sin imagen]',
     existencia int default 0,
     codigoProveedor int,
     codigoTipoDeProducto int,
@@ -444,6 +444,19 @@ create procedure sp_AgregarTipoProducto(
 )
 begin
     insert into TipoProducto (descripcion) values (descripcion);
+end $$
+delimiter ;
+
+delimiter $$
+create procedure sp_BuscarTipoProducto(
+	in _codigoTipoProducto int
+)
+begin
+    select
+		T.codigoTipoProducto,
+		T.descripcion
+	from TipoProducto T
+		where T.codigoTipoProducto = _codigoTipoProducto;
 end $$
 delimiter ;
 

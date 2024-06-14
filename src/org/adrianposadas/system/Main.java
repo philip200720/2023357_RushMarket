@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import org.adrianposadas.controllers.MenuCargoEmpleadoController;
 import org.adrianposadas.controllers.MenuClientesController;
 import org.adrianposadas.controllers.MenuCompraController;
+import org.adrianposadas.controllers.MenuDetalleCompraController;
 import org.adrianposadas.controllers.MenuEmailProveedorController;
 import org.adrianposadas.controllers.MenuPrincipalController;
 import org.adrianposadas.controllers.MenuProductosController;
@@ -146,6 +147,15 @@ public class Main extends Application {
         try{
             MenuProductosController menuProductosView = (MenuProductosController)cambiarEscena("MenuProductosView.fxml", 1275, 718);
             menuProductosView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void menuDetalleCompraView(){
+        try{
+            MenuDetalleCompraController menuDetalleCompraView = (MenuDetalleCompraController)cambiarEscena("MenuDetalleCompraView.fxml", 1289, 638);
+            menuDetalleCompraView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

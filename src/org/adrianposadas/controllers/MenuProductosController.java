@@ -3,7 +3,6 @@ package org.adrianposadas.controllers;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -294,7 +293,7 @@ public class MenuProductosController implements Initializable{
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar un elemento!");
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un elemento");
                 }
         }
     }
