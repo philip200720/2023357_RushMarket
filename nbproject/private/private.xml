@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/adria/OneDrive/Documentos/NetBeansProjects/RushMarket/2023357_RushMarket/src/org/adrianposadas/controllers/MenuDetalleCompraController.java</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/NetBeansProjects/RushMarket/2023357_RushMarket/src/org/adrianposadas/beans/TipoProducto.java</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/NetBeansProjects/RushMarket/2023357_RushMarket/src/org/adrianposadas/beans/Proveedores.java</file>
             <file>file:/C:/Users/adria/OneDrive/Documentos/NetBeansProjects/RushMarket/2023357_RushMarket/src/org/adrianposadas/controllers/MenuProductosController.java</file>
+=======
+            <file>file:/C:/Users/Informatica/Documents/2023357/2023357_RushMarket/src/org/adrianposadas/controllers/MenuProductosController.java</file>
+>>>>>>> 695efd32f982b8ad558a96b88f058caedf309a5a
         </group>
     </open-files>
 </project-private>

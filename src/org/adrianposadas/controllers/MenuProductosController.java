@@ -376,6 +376,8 @@ public class MenuProductosController implements Initializable{
     }
 
     public void seleccionarElemento() {
+        cmbProveedor.setDisable(false);
+        cmbTipoProducto.setDisable(false);
         txtProductoId.setText(String.valueOf(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getProductoId()));
         txtDescripcion.setText(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getDescripcionProducto());
         cmbProveedor.getSelectionModel().select(buscarProveedor(((Productos) tblProductos.getSelectionModel().getSelectedItem()).getCodigoProveedor()));

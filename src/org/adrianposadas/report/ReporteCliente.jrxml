@@ -1,30 +1,216 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11c3aac3-5087-4e86-9cd0-31b1e1e8366a">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.9090909090909145"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFDDBF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFF1E6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue()%2==0)]]></conditionExpression>
+			<style backcolor="#FFFBF8"/>
+		</conditionalStyle>
+	</style>
+	<style name="table 1">
+		<box>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFEDBF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFF8E6">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="5dfb3f61-cb56-4f6b-bbdb-48e5bacebef9"/>
+	<subDataset name="Table Dataset 2" uuid="047559d0-9f35-4f69-b5f1-ee1404fcaa17"/>
+	<queryString>
+		<![CDATA[call sp_ListarClientes()]]>
+	</queryString>
+	<field name="codigoCliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nitCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefonoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="correoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
-		<band height="802" splitType="Stretch"/>
+		<band height="802" splitType="Stretch">
+			<elementGroup/>
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="edc00f6b-189e-4b8d-a094-c7a7550c07d6"/>
+				<imageExpression><![CDATA["C:\\Users\\Informatica\\Documents\\2023357\\2023357_RushMarket\\src\\org\\adrianposadas\\images\\White Brown Minimalist Aesthetic Professional Cover Letter (1) (1).png"]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="34" width="192" height="67" uuid="950df021-879c-4e48-a59a-cd0a004a142c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="50"/>
+				</textElement>
+				<text><![CDATA[Clientes]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="36" splitType="Stretch">
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="129" y="12" width="95" height="20" uuid="9fc0763a-12a8-49e7-bd26-5616162ff2bf"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="43" y="12" width="100" height="20" uuid="75686cbc-6761-46f4-b3e3-154d476840a0"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Fecha de reporte: ]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="45" y="4" width="65" height="19" uuid="d43677d2-67de-4419-9700-292733bcc563"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[nitCliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="3" width="100" height="20" uuid="91df4034-266f-48dd-bbab-9f904106f150"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[nombreCliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="3" width="100" height="20" uuid="a163479c-af17-41d2-8924-8383963a1ff6"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[direccionCliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="4" width="100" height="19" uuid="47627975-e493-4a9e-8b80-2b3c1254362d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[correoCliente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="44" y="0" width="481" height="1" uuid="e97c9d57-6404-4c3f-b458-f0b3e4c632fa"/>
+			</line>
+			<line>
+				<reportElement x="43" y="0" width="1" height="25" uuid="037de50c-e54c-4d86-8d39-36c71d209629"/>
+			</line>
+			<line>
+				<reportElement x="525" y="0" width="1" height="25" uuid="759868aa-179b-47f8-995a-3dea0ca6c862"/>
+			</line>
+			<line>
+				<reportElement x="44" y="24" width="481" height="1" uuid="fd81a8ef-26ee-4411-bb7b-5f1e23c19959"/>
+			</line>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="34" splitType="Stretch">
+			<elementGroup/>
+			<textField>
+				<reportElement x="44" y="7" width="65" height="20" uuid="992cfbc2-5f8c-4fd0-9a8c-bed79817630c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nitCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="156" y="7" width="100" height="20" uuid="a5cbf3dd-a217-41f5-8dff-7e865555fa76"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="7" width="100" height="20" uuid="ce3a9b87-bdd5-402b-b3b6-866fd0950c6b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccionCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="7" width="100" height="20" uuid="b6cb25f3-e5d2-4d12-9e61-2d5060efca7c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{correoCliente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="43" y="0" width="1" height="34" uuid="2904b85b-d329-49ec-981a-5dab2fa1216d"/>
+			</line>
+			<line>
+				<reportElement x="525" y="0" width="1" height="34" uuid="c74d737d-a47d-42a7-88fa-eb94f6aec3c8"/>
+			</line>
+			<line>
+				<reportElement x="43" y="32" width="483" height="1" uuid="2103669e-2bcd-4f1f-95ff-b4dae1260ec0"/>
+			</line>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="34" width="316" height="20" uuid="b743cf78-c26a-443c-bdd5-5c1f5b4e69a5"/>
+				<text><![CDATA[atencionRush@rushmarquet.org  |  4016-8952  |  Guatemala City ]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
