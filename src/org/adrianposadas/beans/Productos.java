@@ -98,4 +98,9 @@ public class Productos {
     public void setCodigoTipoProducto(int codigoTipoProducto) {
         this.codigoTipoProducto = codigoTipoProducto;
     }
+    
+    @Override
+    public String toString(){
+        return "| " + getDescripcionProducto();
+    }
 }

@@ -19,6 +19,7 @@ import org.adrianposadas.controllers.MenuClientesController;
 import org.adrianposadas.controllers.MenuCompraController;
 import org.adrianposadas.controllers.MenuDetalleCompraController;
 import org.adrianposadas.controllers.MenuEmailProveedorController;
+import org.adrianposadas.controllers.MenuEmpleadosController;
 import org.adrianposadas.controllers.MenuPrincipalController;
 import org.adrianposadas.controllers.MenuProductosController;
 import org.adrianposadas.controllers.MenuProveedoresController;
@@ -156,6 +157,15 @@ public class Main extends Application {
         try{
             MenuDetalleCompraController menuDetalleCompraView = (MenuDetalleCompraController)cambiarEscena("MenuDetalleCompraView.fxml", 1289, 638);
             menuDetalleCompraView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+        public void menuEmpleadosView(){
+        try{
+            MenuEmpleadosController menuEmpleadosView = (MenuEmpleadosController)cambiarEscena("MenuEmpleadosView.fxml", 1295, 727);
+            menuEmpleadosView.setEscenarioPrincipal(this);
         }catch(Exception e){
             e.printStackTrace();
         }

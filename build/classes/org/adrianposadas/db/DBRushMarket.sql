@@ -601,6 +601,21 @@ end $$
 delimiter ;
 
 delimiter $$
+create procedure sp_BuscarCompras(
+	in _compraId int
+)
+begin
+    select
+        C.compraId,
+		C.fechaCompra,
+		C.descripcion,
+		C.totalCompra 
+    from Compras C
+		where C.compraId = _compraId;
+end $$
+delimiter ;
+
+delimiter $$
 create procedure sp_ListarCompras()
 begin
     select
@@ -719,7 +734,17 @@ begin
 end $$
 delimiter ;
 
-
+delimiter $$
+create procedure sp_BuscarCargoEmpleado(in _codigoCargoEmpleado int)
+begin
+    select
+		C.codigoCargoEmpleado,
+		C.nombreCargo,
+        C.descripcionCargo
+	from CargoEmpleado C
+		where C.codigoCargoEmpleado = _codigoCargoEmpleado;
+end $$
+delimiter ;
 
 delimiter $$
 create procedure sp_ListarCargoEmpleado()

@@ -49,4 +49,9 @@ public class Compras {
     public void setTotalCompra(double totalCompra) {
         this.totalCompra = totalCompra;
     }
+    
+    @Override
+    public String toString(){
+        return "| " + getDescripcion();
+    }
 }

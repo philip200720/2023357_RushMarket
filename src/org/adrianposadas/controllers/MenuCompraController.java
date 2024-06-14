@@ -4,7 +4,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -33,9 +32,7 @@ public class MenuCompraController implements Initializable{
     }
 
     private operaciones tipoDeOperaciones = operaciones.NINGUNO;
-
     private ObservableList<Compras> listaCompras;
-
     private Main escenarioPrincipal;
 
     @FXML

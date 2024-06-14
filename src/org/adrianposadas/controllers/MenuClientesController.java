@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +27,7 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.adrianposadas.beans.Clientes;
 import org.adrianposadas.db.Conexion;
+import org.adrianposadas.report.GenerarReporte;
 import org.adrianposadas.system.Main;
 
 public class MenuClientesController implements Initializable {
@@ -231,6 +234,9 @@ public class MenuClientesController implements Initializable {
      
      public void reportes(){
          switch(tipoOperacion){
+             case NINGUNO:
+                imprimirReporte();
+                break;
              case ACTUALIZAR:
                  desactivarControles();
                  limpiarControles();
@@ -245,8 +251,13 @@ public class MenuClientesController implements Initializable {
                  tipoOperacion = operaciones.NINGUNO;
                  break;
          }
-         
      }
+     
+     public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("numeroFactura", null);
+        GenerarReporte.mostrarReportes("reportFacturas.jasper", "Reporte de los facturas", parametros);
+    }
      
      public void guardar(){
         try{

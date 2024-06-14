@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="727.0" prefWidth="1295.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.adrianposadas.controllers.MenuEmpleadosController">
+   <children>
+      <ImageView fitHeight="754.0" fitWidth="1295.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/White%20and%20Blue%20Professional%20Modern%20Technology%20Pitch%20Deck%20Presentation%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="14.0" styleClass="labelTitulo" stylesheets="@../source/Proyecto2023357CSS.css" text="Empleados" />
+      <GridPane layoutX="24.0" layoutY="164.0" prefHeight="433.0" prefWidth="207.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#agregar" stylesheets="@../source/Proyecto2023357CSS.css" text="Agregar">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnEliminar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#eliminar" stylesheets="@../source/Proyecto2023357CSS.css" text="Eliminar" GridPane.rowIndex="1">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <Button fx:id="btnReportes" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#reportes" stylesheets="@../source/Proyecto2023357CSS.css" text="Reportes" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <ImageView fx:id="imgAgregar" fitHeight="33.0" fitWidth="37.0" onDragDetected="#agregar" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/agregar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgReportes" fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
+               <image>
+                  <Image url="@../images/reportes.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnEditar" minHeight="100.0" minWidth="200.0" mnemonicParsing="false" onAction="#editar" stylesheets="@../source/Proyecto2023357CSS.css" text="Editar" GridPane.rowIndex="2">
+               <styleClass>
+                  <String fx:value="button2" />
+                  <String fx:value="button3" />
+               </styleClass>
+            </Button>
+            <ImageView fx:id="imgEliminar" fitHeight="37.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@../images/eliminar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgEditar" fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+               <image>
+                  <Image url="@../images/editar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </GridPane>
+      <Button fx:id="btnHome" layoutX="43.0" layoutY="624.0" mnemonicParsing="false" onAction="#home" prefHeight="50.0" prefWidth="73.0" style="-fx-background-color: 100;">
+         <graphic>
+            <ImageView fitHeight="57.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/home.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TableView fx:id="tblEmpleados" layoutX="244.0" layoutY="267.0" onMouseClicked="#seleccionarElemento" prefHeight="446.0" prefWidth="1022.0" stylesheets="@../source/Proyecto2023357CSS.css">
+         <columns>
+            <TableColumn fx:id="colEmpleadoId" prefWidth="77.0" text="empleadoId" />
+            <TableColumn fx:id="colNombreEmpleado" minWidth="0.0" prefWidth="210.0" text="nombreEmpleado" />
+            <TableColumn fx:id="colApellidoEmpleado" minWidth="0.0" prefWidth="225.0" text="apellidoCliente" />
+            <TableColumn fx:id="colSueldo" prefWidth="115.0" text="sueldo" />
+            <TableColumn fx:id="colDireccion" prefWidth="182.0" text="direccion" />
+            <TableColumn fx:id="colTurno" prefWidth="122.0" text="turno" />
+            <TableColumn fx:id="colCargoId" prefWidth="90.0" text="cargoId" />
+         </columns>
+         <styleClass>
+            <String fx:value="table-row-cell1" />
+            <String fx:value="column-header-background" />
+            <String fx:value="table-view1" />
+         </styleClass>
+      </TableView>
+      <GridPane layoutX="244.0" layoutY="141.0" prefHeight="100.0" prefWidth="777.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="66.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="176.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="0.0" prefWidth="91.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="143.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="134.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="486.0" minWidth="10.0" prefWidth="194.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="63.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="17.0" prefWidth="102.0" text="Apellido" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="114.0" text="Direccion" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="txtDireccion" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label text="Turno" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label text="ID" />
+            <TextField fx:id="txtNombreEmpleado" editable="false" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtApellidoEmpleado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtTurno" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="txtSueldo" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <TextField fx:id="txtEmpleadoId" GridPane.columnIndex="1" />
+            <Label text="Nombre" GridPane.rowIndex="1" />
+            <Label text="Sueldo" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbCargoId" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Label text="Cargo" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

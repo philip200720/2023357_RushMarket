@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="11c3aac3-5087-4e86-9cd0-31b1e1e8366a">
 	<property name="ireport.zoom" value="0.9090909090909145"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="384"/>
 	<style name="table">
 		<box>
 			<topPen lineWidth="1.0" lineColor="#000000"/>
@@ -85,8 +85,8 @@
 		<band height="802" splitType="Stretch">
 			<elementGroup/>
 			<image>
-				<reportElement x="0" y="0" width="555" height="802" uuid="edc00f6b-189e-4b8d-a094-c7a7550c07d6"/>
-				<imageExpression><![CDATA["C:\\Users\\Informatica\\Documents\\2023357\\2023357_RushMarket\\src\\org\\adrianposadas\\images\\White Brown Minimalist Aesthetic Professional Cover Letter (1) (1).png"]]></imageExpression>
+				<reportElement x="0" y="0" width="555" height="802" uuid="d25dcce1-eebe-492e-a307-714a3f58f2cc"/>
+				<imageExpression><![CDATA["C:\\Users\\adria\\OneDrive\\Documentos\\NetBeansProjects\\RushMarket\\2023357_RushMarket\\src\\org\\adrianposadas\\images\\membrete.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -209,7 +209,7 @@
 		<band height="54" splitType="Stretch">
 			<staticText>
 				<reportElement x="119" y="34" width="316" height="20" uuid="b743cf78-c26a-443c-bdd5-5c1f5b4e69a5"/>
-				<text><![CDATA[atencionRush@rushmarquet.org  |  4016-8952  |  Guatemala City ]]></text>
+				<text><![CDATA[atencionRush@rushmarquet.org.gt  |  4016-8952  |  Guatemala City ]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

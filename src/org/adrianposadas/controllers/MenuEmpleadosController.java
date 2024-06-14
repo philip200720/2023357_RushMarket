@@ -71,7 +71,7 @@ public class MenuEmpleadosController implements Initializable{
     @FXML
     private Button btnEditar;
     @FXML
-    private Button btnReporte;
+    private Button btnReportes;
     @FXML
     private ImageView imgAgregar;
     @FXML
@@ -85,7 +85,7 @@ public class MenuEmpleadosController implements Initializable{
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        cargaDatos();
+        cargarDatos();
         cmbCargoId.setItems(getCargos());
     }
     
@@ -93,7 +93,7 @@ public class MenuEmpleadosController implements Initializable{
         return escenarioPrincipal;
     }
 
-    public void cargaDatos() {
+    public void cargarDatos() {
         tblEmpleados.setItems(getEmpleados());
         colEmpleadoId.setCellValueFactory(new PropertyValueFactory<Empleados, Integer>("empleadoId"));
         colNombreEmpleado.setCellValueFactory(new PropertyValueFactory<Empleados, String>("nombreEmpleado"));
@@ -104,7 +104,7 @@ public class MenuEmpleadosController implements Initializable{
         colCargoId.setCellValueFactory(new PropertyValueFactory<Empleados, Integer>("cargoId"));
     }
 
-    public void seleccionarElementos() {
+    public void seleccionarElemento() {
         txtEmpleadoId.setText(String.valueOf(((Empleados) tblEmpleados.getSelectionModel().getSelectedItem()).getEmpleadoId()));
         txtNombreEmpleado.setText(((Empleados) tblEmpleados.getSelectionModel().getSelectedItem()).getNombreEmpleado());
         txtApellidoEmpleado.setText(String.valueOf(((Empleados) tblEmpleados.getSelectionModel().getSelectedItem()).getApellidoEmpleado()));
@@ -122,7 +122,7 @@ public class MenuEmpleadosController implements Initializable{
             procedimiento.setInt(1, cargoId);
             ResultSet registro = procedimiento.executeQuery();
             while (registro.next()) {
-                resultado = new CargoEmpleado(registro.getInt("cargoId"),
+                resultado = new CargoEmpleado(registro.getInt("codigoCargoEmpleado"),
                         registro.getString("nombreCargo"),
                         registro.getString("DescripcionCargo")
                 );
@@ -138,7 +138,7 @@ public class MenuEmpleadosController implements Initializable{
     public ObservableList<Empleados> getEmpleados() {
         ArrayList<Empleados> lista = new ArrayList<Empleados>();
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_BuscarEmpleados ()}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_ListarEmpleados ()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
                 lista.add(new Empleados(resultado.getInt("empleadoId"),
@@ -161,9 +161,9 @@ public class MenuEmpleadosController implements Initializable{
             PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_ListarCargoEmpleado ()}");
             ResultSet resultado = procedimiento.executeQuery();
             while (resultado.next()) {
-                lista.add(new CargoEmpleado(resultado.getInt("cargoId"),
+                lista.add(new CargoEmpleado(resultado.getInt("codigoCargoEmpleado"),
                         resultado.getString("nombreCargo"),
-                        resultado.getString("DescripcionCargo")));
+                        resultado.getString("descripcionCargo")));
             }
 
         } catch (Exception e) {
@@ -180,7 +180,7 @@ public class MenuEmpleadosController implements Initializable{
                 btnAgregar.setText("Guardar");
                 btnEliminar.setText("Cancelar");
                 btnEditar.setDisable(true);
-                btnReporte.setDisable(true);
+                btnReportes.setDisable(true);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/cancelar.png"));
                 imgReportes.setOpacity(0.5);
@@ -194,7 +194,7 @@ public class MenuEmpleadosController implements Initializable{
                 btnAgregar.setText("Agregar");
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
-                btnReporte.setDisable(false);
+                btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
                 
@@ -214,7 +214,7 @@ public class MenuEmpleadosController implements Initializable{
         registro.setDireccion(txtDireccion.getText());
         registro.setTurno(txtTurno.getText());
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarEmpleados(?, ?, ?, ?, ?, ?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_AgregarEmpleado(?, ?, ?, ?, ?, ?)}");
             procedimiento.setString(1, registro.getNombreEmpleado());
             procedimiento.setString(2, registro.getApellidoEmpleado());
             procedimiento.setDouble(3, registro.getSueldo());
@@ -227,7 +227,7 @@ public class MenuEmpleadosController implements Initializable{
                 registro.setEmpleadoId(generatedKeys.getInt(1));
             }
             listaEmpleados.add(registro);
-            cargaDatos();
+            cargarDatos();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -241,7 +241,7 @@ public class MenuEmpleadosController implements Initializable{
                 btnAgregar.setText("Agregar");
                 btnEliminar.setText("Eliminar");
                 btnEditar.setDisable(false);
-                btnReporte.setDisable(false);
+                btnReportes.setDisable(false);
                 imgAgregar.setImage(new Image("/org/adrianposadas/images/agregar.png"));
                 imgEliminar.setImage(new Image("/org/adrianposadas/images/eliminar.png"));
                 imgReportes.setOpacity(1);
@@ -274,7 +274,7 @@ public class MenuEmpleadosController implements Initializable{
             case NINGUNO:
                 if (tblEmpleados.getSelectionModel().getSelectedItem() != null) {
                     btnEditar.setText("Actualizar");
-                    btnReporte.setText("Cancelar");
+                    btnReportes.setText("Cancelar");
                     btnAgregar.setDisable(true);
                     btnEliminar.setDisable(true);
                     imgEditar.setImage(new Image("/org/adrianposadas/images/guardar.png"));
@@ -285,13 +285,13 @@ public class MenuEmpleadosController implements Initializable{
                     txtEmpleadoId.setEditable(false);
                     tipoDeOperacion = operaciones.ACTUALIZAR;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Debe de seleccionar algun elemento!");
+                    JOptionPane.showMessageDialog(null, "Debe de seleccionar algun elemento");
                 }
                 break;
             case ACTUALIZAR:
                 actualizar();
                 btnEditar.setText("Editar");
-                btnReporte.setText("Reporte");
+                btnReportes.setText("Reporte");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
@@ -301,7 +301,7 @@ public class MenuEmpleadosController implements Initializable{
                 desactivarControles();
                 limpiarControles();
                 tipoDeOperacion = operaciones.NINGUNO;
-                cargaDatos();
+                cargarDatos();
                 break;
         }
 
@@ -309,8 +309,13 @@ public class MenuEmpleadosController implements Initializable{
 
     public void actualizar() {
         try {
-            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EditarEmpleados (?, ?, ?, ?, ?, ?, ?)}");
+            PreparedStatement procedimiento = Conexion.getInstance().getConnection().prepareCall("{call sp_EditarEmpleado (?, ?, ?, ?, ?, ?, ?)}");
             Empleados registro = (Empleados) tblEmpleados.getSelectionModel().getSelectedItem();
+            registro.setNombreEmpleado(txtNombreEmpleado.getText());
+            registro.setApellidoEmpleado(txtApellidoEmpleado.getText());
+            registro.setSueldo(Double.valueOf(txtSueldo.getText()));
+            registro.setDireccion(txtDireccion.getText());
+            registro.setTurno(txtTurno.getText());
             procedimiento.setInt(1, registro.getEmpleadoId());
             procedimiento.setString(2, registro.getNombreEmpleado());
             procedimiento.setString(3, registro.getApellidoEmpleado());
@@ -324,13 +329,13 @@ public class MenuEmpleadosController implements Initializable{
         }
     }
 
-    public void reporte() {
+    public void reportes() {
         switch (tipoDeOperacion) {
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
                 btnEditar.setText("Editar");
-                btnReporte.setText("Reporte");
+                btnReportes.setText("Reporte");
                 btnAgregar.setDisable(false);
                 btnEliminar.setDisable(false);
                 imgEditar.setImage(new Image("/org/adrianposadas/images/editar.png"));
@@ -376,7 +381,7 @@ public class MenuEmpleadosController implements Initializable{
     }
 
     @FXML
-    public void regresar(ActionEvent event) {
+    public void home(ActionEvent event) {
         if (event.getSource() == btnHome) {
             escenarioPrincipal.menuPrincipalView();
         }
