@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import org.adrianposadas.beans.Productos;
 import org.adrianposadas.beans.Proveedores;
 import org.adrianposadas.beans.TipoProducto;
 import org.adrianposadas.db.Conexion;
+import org.adrianposadas.report.GenerarReporte;
 import org.adrianposadas.system.Main;
 
 public class MenuProductosController implements Initializable{
@@ -359,6 +362,9 @@ public class MenuProductosController implements Initializable{
 
     public void reportes() {
         switch (tipoDeOperaciones) {
+            case NINGUNO:
+                imprimirReporte();
+                break;
             case ACTUALIZAR:
                 desactivarControles();
                 limpiarControles();
@@ -373,6 +379,12 @@ public class MenuProductosController implements Initializable{
                 tipoDeOperaciones = operaciones.NINGUNO;
                 break;
         }
+    }
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("productoId", null);
+        GenerarReporte.mostrarReportes("reporteProductos.jasper", "Reporte de Productos", parametros);
     }
 
     public void seleccionarElemento() {

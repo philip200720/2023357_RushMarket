@@ -20,6 +20,7 @@ import org.adrianposadas.controllers.MenuCompraController;
 import org.adrianposadas.controllers.MenuDetalleCompraController;
 import org.adrianposadas.controllers.MenuEmailProveedorController;
 import org.adrianposadas.controllers.MenuEmpleadosController;
+import org.adrianposadas.controllers.MenuFacturaController;
 import org.adrianposadas.controllers.MenuPrincipalController;
 import org.adrianposadas.controllers.MenuProductosController;
 import org.adrianposadas.controllers.MenuProveedoresController;
@@ -170,4 +171,12 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+        public void menuFacturaView(){
+        try{
+            MenuFacturaController menuFacturaView = (MenuFacturaController)cambiarEscena("MenuFacturaView.fxml", 1159, 651);
+            menuFacturaView.setEscenarioPrincipal(this);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+}
 }

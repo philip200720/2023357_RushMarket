@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02e85134-528b-4d8c-99cf-e70687e9a6c1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[call sp_ListarProveedores()]]>
+	</queryString>
+	<field name="codigoProveedor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nitProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="apellidoProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccionProveedor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contactoPrincipal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="paginaWeb" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="555" height="802" uuid="601ba25d-6a21-4544-be1f-eb14960a04f3"/>
+				<imageExpression><![CDATA["C:\\Users\\adria\\OneDrive\\Documentos\\NetBeansProjects\\RushMarket\\2023357_RushMarket\\src\\org\\adrianposadas\\images\\membrete.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="121" y="39" width="312" height="58" uuid="65e497f0-0ade-4a9a-9196-54dd1063a351"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="50"/>
+				</textElement>
+				<text><![CDATA[Proveedores]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="15" width="100" height="20" uuid="c55ef301-6579-45ea-8cf5-cb1f106df66d"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Fecha de reporte: ]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="121" y="15" width="100" height="20" uuid="2d335e4b-51a7-4fb7-9952-69849198f75d"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement x="35" y="0" width="484" height="29" uuid="66081455-50ae-42e0-a8a0-5d07ac96eab0"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="162" y="6" width="100" height="20" uuid="23db2603-9d4d-4548-9c28-5b5e83aa2a14"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="6" width="100" height="20" uuid="d8932420-3a22-487b-971e-d27f4a9bae72"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="6" width="100" height="20" uuid="5e6a4c9a-6845-4a73-86c1-55f50ec3ec1c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Contacto Principal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="6" width="100" height="20" uuid="72686bd5-ee0a-4e5f-8a99-0470cf921cf4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Razon Social]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<rectangle>
+				<reportElement x="35" y="0" width="484" height="32" uuid="de48082b-2a22-4e50-9aa3-e34970b67735"/>
+			</rectangle>
+			<textField>
+				<reportElement x="35" y="7" width="100" height="20" uuid="9a1627fe-896b-47d6-b324-a7d6db29891a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombreProveedor} + " " + $F{apellidoProveedor} ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="7" width="100" height="20" uuid="005639b8-124b-4a8b-8d5e-a434be79e610"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{direccionProveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="7" width="100" height="20" uuid="6be9f2a6-d330-4b96-9681-38234227c8b4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{contactoPrincipal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="298" y="7" width="100" height="20" uuid="9e4bb277-111d-4042-a3d9-112734614f57"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="96" y="0" width="363" height="20" uuid="9ba3ada5-5992-4de6-a023-d5d0e9485081"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[atencionRush@rushmarquet.org.gt  |  4016-8952  |  Guatemala City]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

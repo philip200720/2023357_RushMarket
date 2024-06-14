@@ -1,7 +1,9 @@
 drop database if exists DBRushMarket;
 create database DBRushMarket;
 use DBRushMarket;
-SET time_zone = '-06:00';
+set time_zone = '-06:00';
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
 
 create table Clientes(
 	codigoCliente int auto_increment,
@@ -844,7 +846,7 @@ delimiter ;
 -- Editar
 delimiter $$
 create procedure sp_EditarEmpleado(
-    in empleadoId int,
+    in empleadoId int,	
     in nombreEmpleado varchar(30),
     in apellidoEmpleado varchar(30),
     in sueldo decimal(10,2),

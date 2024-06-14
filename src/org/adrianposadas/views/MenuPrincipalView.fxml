@@ -28,6 +28,7 @@
                   <MenuItem fx:id="btnCargoEmpleado" mnemonicParsing="false" onAction="#clickPrincipalController" text="Cargo de Empleado" />
                   <MenuItem fx:id="btnEmpleados" mnemonicParsing="false" onAction="#clickPrincipalController" text="Empleados" />
                   <MenuItem fx:id="btnDetalleCompra" mnemonicParsing="false" onAction="#clickPrincipalController" text="Detalle de Compra" />
+                  <MenuItem fx:id="btnFactura" mnemonicParsing="false" onAction="#clickPrincipalController" text="Factura" />
               <MenuItem fx:id="btnSalir" mnemonicParsing="false" onAction="#clickPrincipalController" text="Salir" />
             </items>
           </Menu>

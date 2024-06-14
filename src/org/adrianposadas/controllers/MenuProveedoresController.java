@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javax.swing.JOptionPane;
 import org.adrianposadas.beans.Proveedores;
 import org.adrianposadas.db.Conexion;
+import org.adrianposadas.report.GenerarReporte;
 import org.adrianposadas.system.Main;
 
 public class MenuProveedoresController implements Initializable{
@@ -242,6 +245,9 @@ public class MenuProveedoresController implements Initializable{
     
     public void reportes(){
          switch(tipoOperacion){
+             case NINGUNO:
+                imprimirReporte();
+                break;
              case ACTUALIZAR:
                  desactivarControles();
                  limpiarControles();
@@ -256,8 +262,13 @@ public class MenuProveedoresController implements Initializable{
                  tipoOperacion = operaciones.NINGUNO;
                  break;
          }
-         
      }
+    
+    public void imprimirReporte(){
+        Map parametros = new HashMap();
+        parametros.put("codigoProveedor", null);
+        GenerarReporte.mostrarReportes("reporteProveedor.jasper", "Reporte de Proveedores", parametros);
+    }
     
     public void actualizar(){
         try{
